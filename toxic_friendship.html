@@ -32,6 +32,38 @@
             font-size: 20px;
             margin-right: 8px;
         }
+        /* Checklist Styling */
+        .checklist {
+            background: #ffebee;
+            padding: 15px;
+            border-left: 5px solid #c62828;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .checklist label {
+            display: block;
+            padding: 5px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .checklist input[type="checkbox"] {
+            transform: scale(1.2);
+            margin-right: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .checklist input[type="checkbox"]:checked {
+            transform: scale(1.5);
+        }
+        #warning {
+            display: none;
+            background: #ffccbc;
+            color: #d84315;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +79,20 @@
                 <li>Betrayal or gossiping behind your back</li>
                 <li>Draining your energy instead of supporting you</li>
             </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>📋 Toxic Friend Checklist</h3>
+            <p>Tick the traits your friend exhibits:</p>
+            <label><input type="checkbox" class="trait"> Always puts you down or makes you feel small</label>
+            <label><input type="checkbox" class="trait"> Manipulates you with guilt or emotional pressure</label>
+            <label><input type="checkbox" class="trait"> Never respects your boundaries</label>
+            <label><input type="checkbox" class="trait"> Lies or spreads rumors about you</label>
+            <label><input type="checkbox" class="trait"> Uses you for personal gain</label>
+            <label><input type="checkbox" class="trait"> Gets jealous when you succeed or make new friends</label>
+            <label><input type="checkbox" class="trait"> Makes you feel drained instead of happy</label>
+            <label><input type="checkbox" class="trait"> Blames you for their problems</label>
+            <div id="warning">⚠️ If more than 4 traits are checked, reconsider the friendship!</div>
         </div>
 
         <div class="step">
@@ -99,5 +145,25 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const checkboxes = document.querySelectorAll(".trait");
+            const warning = document.getElementById("warning");
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener("change", function () {
+                    let checkedCount = document.querySelectorAll(".trait:checked").length;
+
+                    // Show warning if more than 4 toxic traits are checked
+                    if (checkedCount > 4) {
+                        warning.style.display = "block";
+                    } else {
+                        warning.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

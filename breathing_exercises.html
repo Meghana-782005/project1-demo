@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Breathing Exercise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1535A2;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: #F4C914;
+            border-radius: 50%;
+            margin: auto;
+            animation: breathing 8s infinite ease-in-out;
+        }
+        @keyframes breathing {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🧘 2-Minute Deep Breathing Exercise</h1>
+    <p>Follow the expanding and contracting circle: Breathe in as it grows, breathe out as it shrinks.</p>
+    <div class="circle"></div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Kids Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .quiz-container { max-width: 600px; margin: auto; padding: 20px; border: 2px solid #333; border-radius: 10px; background-color: #f9f9f9; }
+        .options button { display: block; width: 100%; margin: 5px 0; padding: 10px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px; }
+        .options button:hover { background-color: #45a049; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 id="question">Loading...</h2>
+        <div class="options" id="options"></div>
+        <button id="next" class="hidden" onclick="nextQuestion()">Next</button>
+        <h3 id="score" class="hidden"></h3>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "What should you do before eating food?", options: ["Wash your hands", "Jump up and down", "Clap your hands", "Take a nap"], answer: 0 },
+            { question: "What is best hydrating drink?", options: ["Water", "Soda", "Coffee", "Ice cream"], answer: 0 },
+            { question: "Why is sleep important?", options: ["It helps your body grow and rest", "It makes you run faster", "It makes your toys happy", "It helps you watch more TV"], answer: 0 },
+            { question: "What should you do when you feel sad?", options: ["Talk to a parent or friend", "Keep it a secret", "Eat lots of dark chocolate", "Ignore it"], answer: 0 },
+            { question: "How many times should you brush your teeth every day?", options: ["once", "Once a week", "Only when they look dirty", "twice a day"], answer: 3 },
+            { question: "What is a fun way to stay active?", options: ["lay on the bed", "Watching TV all day", "connecting with nature", "talking to online friends"], answer: 2 },
+            { question: "What should you do if you have a big feeling, like being angry or scared?", options: ["Take deep breaths and talk about it", "Shout at people", "Hide under your bed", "Throw your toys"], answer: 0 },
+            { question: "Why do we need to eat fruits and vegetables?", options: ["weaken our system", "They turn us into superheroes", "They are just for decoration", "they help in completing the nutrients needs for the body"], answer: 3 },
+            { question: "What should you do when you sneeze or cough?", options: ["Cover your mouth with your elbow", "Sneeze on your friend", "Shout really loud", "Run away"], answer: 0 },
+            { question: "Why is playing with friends good for you?", options: ["It makes you happy and helps you learn to share", "It makes you tired", "It’s only for fun, not health", "It makes your toys jealous"], answer: 0 },
+            { question: "if you ever felt the eyes strain whhat would you do?", options: ["keep watching or doing whatever you were doing", "do the 20:20:20 rule", "watch social media", "dont follow any kind of rule "], answer: 1 }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            document.getElementById("next").classList.add("hidden");
+            const q = questions[currentQuestion];
+            document.getElementById("question").innerText = q.question;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+            
+            q.options.forEach((option, index) => {
+                const btn = document.createElement("button");
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(index);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected) {
+            const correct = questions[currentQuestion].answer;
+            if (selected === correct) {
+                score++;
+            }
+            document.getElementById("next").classList.remove("hidden");
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                document.getElementById("question").innerText = "Quiz Completed!";
+                document.getElementById("options").innerHTML = "";
+                document.getElementById("score").innerText = `Your Score: ${score}/${questions.length}`;
+                document.getElementById("score").classList.remove("hidden");
+                document.getElementById("next").classList.add("hidden");
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
